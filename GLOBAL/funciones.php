@@ -13,7 +13,7 @@ function consultaSQL(PDO $pdo,$sql)
 
 // Funciones que no se si estoy usando
 
-function consultaTabla(PDO $pdo, $nombreTabla)
+function consultaTablasSQL(PDO $pdo, $nombreTabla)
 {
     $query = $pdo->prepare("SELECT * FROM $nombreTabla");
     $query->execute();
