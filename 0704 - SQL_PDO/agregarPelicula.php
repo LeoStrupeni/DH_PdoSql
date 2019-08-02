@@ -4,6 +4,25 @@ require_once "../GLOBAL/config.php";
 require_once "../GLOBAL/conexion.php";
 require_once "../GLOBAL/funciones.php";
 
+if($_POST){
+	$title=$_POST['title'];
+	$query = $pdo->prepare("SELECT title FROM movies");
+	$query->execute();
+	$resultado = $query->fetchall(PDO::FETCH_ASSOC);
+
+	$temp="Puede Agregar la Pelicula";
+
+ 	foreach ($resultado as $key => $value) {
+
+		if($value['title']==$title){
+			
+			$temp="La pelicula ya se encuentra en la Base";
+			
+		}
+	}
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +38,16 @@ require_once "../GLOBAL/funciones.php";
 	<div class="container">
 		<a href="series.php">Volver a Listado</a>
 		<br>
+
+		<?php if (!empty($temp)) :?>
+			<div class="alert alert-warning" role="alert">
+				<?=$temp?>
+			</div>
+		<?php endif;?>
+
+
+
+
 		<div class="col h3">
 			3 - Formulario
 		</div>
